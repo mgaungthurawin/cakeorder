@@ -161,6 +161,10 @@
 
             $('#parent').select2();
 
+            $('#date').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+
         });
     </script>
     @yield('scripts')

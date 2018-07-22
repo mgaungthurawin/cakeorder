@@ -4,10 +4,6 @@
         <div class="topbar">
             <div class="topbar-social">
                 <a href="#" class="topbar-social-item fa fa-facebook"></a>
-                <a href="#" class="topbar-social-item fa fa-instagram"></a>
-                <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
-                <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
-                <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
             </div>
 
             <span class="topbar-child1">
@@ -16,14 +12,11 @@
 
             <div class="topbar-child2">
                 <span class="topbar-email">
-                    mgaungthurawin@gmail.com
+                    Nyo Lay Htike
                 </span>
 
                 <div class="topbar-language rs1-select2">
-                    <select class="selection-1" name="time">
-                        <option>USD</option>
-                        <option>EUR</option>
-                    </select>
+                    
                 </div>
             </div>
         </div>
@@ -42,11 +35,11 @@
                             <a href="{{url('/')}}">Home</a>
                         </li>
                         <li>
-                            <a href="#">About</a>
+                            <a href="{{url('/about')}}">About</a>
                         </li>
 
                         <li>
-                            <a href="#">Contact</a>
+                            <a href="{{url('/contact')}}">Contact</a>
                         </li>
                         <li>
                             <a href="{{ url('/dashboard') }}">Dashboard</a>

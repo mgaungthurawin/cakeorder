@@ -17,9 +17,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->get('title')) {
+            $products = Product::where('title', 'like', '%' . $request->get('title') . '%')->paginate(10);
+            return $this->indexpage($products);
+        }
+
         $products = Product::orderBy('id', 'DESC')->paginate(10);
+        return $this->indexpage($products);
+    }
+
+    private function indexpage($products) {
         return view('admin.product.index', compact('products'));
     }
 

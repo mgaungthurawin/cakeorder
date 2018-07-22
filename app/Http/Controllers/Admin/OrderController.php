@@ -17,9 +17,18 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->get('order_id')) {
+            $orders = Order::where('order_id', $request->order_id)->paginate('10');
+            return $this->indexpage($orders);
+        }
+
         $orders = Order::orderby('id', 'DESC')->paginate('10');
+        return $this->indexpage($orders);
+    }
+
+    private function indexpage($orders) {
         return view('admin.order.index', compact('orders'));
     }
 

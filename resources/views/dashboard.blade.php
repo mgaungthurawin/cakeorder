@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    @include('layouts.head')
 
     <section class="blog bgwhite p-t-94 p-b-65">
         <div class="container">

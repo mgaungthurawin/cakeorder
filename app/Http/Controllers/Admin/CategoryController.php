@@ -15,9 +15,18 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->get('name')) {
+            $categories = Category::where('name', 'like', '%' . $request->get('name') . '%')->paginate(10);
+            return $this->indexpage($categories);
+        }
         $categories = Category::orderby('id', 'DESC')->paginate(10);
+        return $this->indexpage($categories);
+        
+    }
+
+    private function indexpage($categories) {
         return view('admin.category.index', compact('categories'));
     }
 
