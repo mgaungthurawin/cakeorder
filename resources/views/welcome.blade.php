@@ -48,9 +48,9 @@
                                 <div class="block2">
                                     <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                         @if($product->stock > 0)
-                                            <a href="{{url('/cake/'.$product->id)}}">
+                                            <!-- <a href="{{url('/cake/'.$product->id)}}"> -->
                                                 <img src="{{url($product->image)}}" alt="IMG-PRODUCT">
-                                            </a>
+                                            <!-- </a> -->
                                         @else
                                             <img src="{{url($product->image)}}" alt="IMG-PRODUCT">
                                         @endif
@@ -58,7 +58,7 @@
 
                                     <div class="block2-txt p-t-20">
                                         @if($product->stock > 0)
-                                        <a href="{{url('/cake/'.$product->id)}}" class="block2-name dis-block s-text3 p-b-5">
+                                        <a href="#" class="block2-name dis-block s-text3 p-b-5">
                                             {{$product->title}}
                                         </a>
                                         @else
@@ -71,6 +71,20 @@
                                         <br>
                                         <span class="block2-price p-r-5">
                                             {{$product->price}} Ks
+                                            @foreach(config('location.location') as $key => $location)
+                                                
+                                                <?php
+                                                    $arr = explode(",", $location);
+                                                    $cost = $product->price + $arr[1];
+                                                    ?>
+                                                    <a href="{{url('/cake/'.$product->id .'/'. $arr[0] .'/'.$arr[1])}}" class="block2-name dis-block s-text3 p-b-5">
+                                                    <?php
+                                                    echo $arr[0] . '-' . $cost . "KS + Delivery Charge";
+                                                    echo "<br/>";
+                                                    // echo $arr[0] . $product->price + $arr[1] . 'KS';
+                                                ?>
+                                                </a>
+                                            @endforeach
                                         </span>
                                         @if($product->stock == 0)
                                             <br>

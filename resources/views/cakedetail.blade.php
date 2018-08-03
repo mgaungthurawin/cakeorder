@@ -25,7 +25,7 @@
                                 </a>
                             </h4>
 
-                            <span class="s-text6">{{$product->price}} Ks</span>
+                            <span class="s-text6">{{ Session::get('location')}} {{$product->price + Session::get('delivary')}} Ks</span>
                             <br/>
                             {{$product->description}}
 

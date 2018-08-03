@@ -3,7 +3,7 @@
 Route::get('/', 'WelcomeController@index');
 Route::get('/about', 'WelcomeController@about');
 Route::get('/contact', 'WelcomeController@contact');
-Route::get('/cake/{id}', 'CakeController@cakedetail');
+Route::get('/cake/{id}/{location}/{delivary}', 'CakeController@cakedetail');
 
 Route::get('/order', 'CakeController@order');
 Route::post('/order', ['as' => 'cakeorder', 'uses' => 'CakeController@postOrder']);
@@ -18,6 +18,14 @@ Route::post('/send', 'MailController@send');
 
 Route::group(['middleware' => 'Dashboard'], function () {
 	Route::get('/dashboard', 'DashboardController@dashboard');
+});
+
+Route::get('/test', function () {
+	foreach (config('location.location') as $key => $location) {
+		echo $location;
+		echo '<br/>';
+	}
+	// var_dump(config('location.location'));
 });
 
 

@@ -15,7 +15,7 @@ use Alert;
 
 class CakeController extends Controller
 {
-    public function cakedetail($id) {
+    public function cakedetail($id, $location, $delivary) {
 
     	$product = Product::find($id);
     	if (empty($product)) {
@@ -24,6 +24,8 @@ class CakeController extends Controller
     	}
 
         Session::put('product_id', $product->id);
+        Session::put('location', $location);
+        Session::put('delivary', $delivary);
     	return view('cakedetail', compact('product'));
     }
 
