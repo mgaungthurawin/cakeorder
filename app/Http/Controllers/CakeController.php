@@ -41,42 +41,53 @@ class CakeController extends Controller
         $country = $wave->country($msisdn);
         $operator = $wave->operator($msisdn, $country);
 
-        if ($country == "Myanmar (Burma)") {
-            $country_id = 3;
-            $operator = $wave->operator($msisdn, $country_id);
-            if ($operator != "Telenor") {
-                Alert::error('Operator not provide. please use telenor', 'Oops!')->persistent('Close');
-                return redirect()->back();
-            } else {
-                $msisdn = $this->modify_msisdn($msisdn);
+        $msisdn = $this->modify_msisdn($msisdn);
+        $customer_id = $this->customer_creation($request->all());
+
+        $product_id = Session::get('product_id');
+        $producthelper = new ProductHelper;
+        $producthelper->decreaseproduct($product_id, 1);
+        $this->order_creation($product_id, $customer_id);
+        Alert::success('Successfully saved', 'Oops!')->persistent('Close');
+        Session::put('phone', $request->phone);
+        return redirect('/');
+
+        // if ($country == "Myanmar (Burma)") {
+        //     $country_id = 3;
+        //     $operator = $wave->operator($msisdn, $country_id);
+        //     if ($operator != "Telenor") {
+        //         Alert::error('Operator not provide. please use telenor', 'Oops!')->persistent('Close');
+        //         return redirect()->back();
+        //     } else {
+        //         $msisdn = $this->modify_msisdn($msisdn);
                 
-                $customer_id = $this->customer_creation($request->all());
+        //         $customer_id = $this->customer_creation($request->all());
 
-                // $payment = json_decode($wave->wave_payment($msisdn, 1, "MMK"), true);
+        //         // $payment = json_decode($wave->wave_payment($msisdn, 1, "MMK"), true);
                 
-                /* For development */
-                $payment = [];
-                $payment['success'] = true;
-                /* For development */
+        //         /* For development */
+        //         $payment = [];
+        //         $payment['success'] = true;
+        //         /* For development */
 
-                if ($payment['success']) {
-                    $product_id = Session::get('product_id');
-                    $producthelper = new ProductHelper;
-                    $producthelper->decreaseproduct($product_id, 1);
-                    $this->order_creation($product_id, $customer_id);
-                    Alert::success('Successfully saved', 'Oops!')->persistent('Close');
-                    Session::put('phone', $request->phone);
-                    return redirect('/');
+        //         if ($payment['success']) {
+        //             $product_id = Session::get('product_id');
+        //             $producthelper = new ProductHelper;
+        //             $producthelper->decreaseproduct($product_id, 1);
+        //             $this->order_creation($product_id, $customer_id);
+        //             Alert::success('Successfully saved', 'Oops!')->persistent('Close');
+        //             Session::put('phone', $request->phone);
+        //             return redirect('/');
 
-                } else {
-                    Alert::error('Unable to order this product', 'Oops!')->persistent('Close');
-                    return redirect()->back();
-                }
-            }
-        } else {
-            Alert::error('Please used myanmar country operator', 'Oops!')->persistent('Close');
-            return redirect()->back();
-        }
+        //         } else {
+        //             Alert::error('Unable to order this product', 'Oops!')->persistent('Close');
+        //             return redirect()->back();
+        //         }
+        //     }
+        // } else {
+        //     Alert::error('Please used myanmar country operator', 'Oops!')->persistent('Close');
+        //     return redirect()->back();
+        // }
     }
 
     private function order_creation($product_id, $customer_id)
