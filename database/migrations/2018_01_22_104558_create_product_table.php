@@ -19,6 +19,7 @@ class CreateProductTable extends Migration
             $table->integer('price');
             $table->integer('stock')->default(0);
             $table->text('description')->nullable();
+            $table->string('weigh');
             $table->text('image');
             $table->timestamps();
         });

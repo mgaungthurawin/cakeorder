@@ -3,6 +3,7 @@
         <th>Title</th>
         <th>Price</th>
         <th>Stock</th>
+        <th>Weigh</th>
         <th colspan="3">Action</th>
     </thead>
     <tbody>
@@ -11,6 +12,7 @@
             <td>{!! $product->title !!}</td>
             <td>{!! $product->price !!}</td>
             <td>{!! $product->stock !!}</td>
+            <td>{!! $product->weigh !!}</td>
             <td>
                 {!! Form::open(['route' => ['product.destroy', $product->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

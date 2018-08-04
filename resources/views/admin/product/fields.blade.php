@@ -33,3 +33,13 @@
     {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group col-sm-6">
+    {!! Form::label('weigh', 'Weigh:') !!} <span class="text-danger">*</span>
+    {!! Form::text('weigh', null, ['class' => 'form-control']) !!}
+    @if ($errors->has('weigh'))
+        <span class="text-danger">
+            <strong>{{ $errors->first('weigh') }}</strong>
+        </span>
+    @endif
+</div>
+

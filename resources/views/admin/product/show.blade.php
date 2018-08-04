@@ -32,6 +32,11 @@
                     </div>
 
                     <div class="form-group col-sm-12">
+                        {!! Form::label('weigh', 'Weigh:') !!}
+                        <p>{!! $product->weigh !!}</p>
+                    </div>
+
+                    <div class="form-group col-sm-12">
                         <img src="{{url($product->image)}}">
                     </div>
 

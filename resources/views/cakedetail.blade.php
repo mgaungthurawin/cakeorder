@@ -24,8 +24,18 @@
                                     {{$product->title}}
                                 </a>
                             </h4>
-
-                            <span class="s-text6">{{ Session::get('location')}} {{$product->price + Session::get('delivary')}} Ks</span>
+                            <div>
+                                <div class="bo4 of-hidden size15 m-b-20">
+                                    <select class="sizefull s-text7 p-l-22 p-r-22" id="product_id" name="product_id">
+                                        @foreach($products as $prod)
+                                            <option value="{{$prod->id}}">{{$prod->weigh}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <span id="cake_weigh" class="s-text6">Weigh - {{ $product->weigh }} </span>
+                            <br/>
+                            <span id="cake_price" class="s-text6">{{ $product->price }} Ks</span>
                             <br/>
                             {{$product->description}}
 
@@ -37,12 +47,9 @@
                     <div class="block3">
                         <div class="block3-txt p-t-14">
                             <div class="w-size25">
-                                <button id="order" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                <a href="{{url('/order')}}" id="wavemoney" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
                                     Order
-                                </button>
-<!--                                 <a href="{{url('/order/wavemoney')}}" id="wavemoney" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
-                                    Order
-                                </a> -->
+                                </a>
                             </div>
                         </div>
                     </div>

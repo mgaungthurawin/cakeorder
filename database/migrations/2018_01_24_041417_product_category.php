@@ -18,7 +18,7 @@ class ProductCategory extends Migration
             $table->foreign('product_id')
                     ->references('id')->on('products')
                     ->onDelete('cascade');
-            $table->integer('category_id')->unsigned();;
+            $table->integer('category_id')->unsigned();
             $table->foreign('category_id')
                     ->references('id')->on('categories')
                     ->onDelete('cascade');

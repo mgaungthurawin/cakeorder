@@ -12,88 +12,86 @@ use Session;
 use App\Helper\WaveHelper;
 use App\Helper\ProductHelper;
 use Alert;
+use Konekt\PdfInvoice\InvoicePrinter;
 
 class CakeController extends Controller
 {
-    public function cakedetail($id, $location, $delivary) {
-
+    public function cakedetail($id) {
     	$product = Product::find($id);
+        $products = Product::where('title', $product->title)->select('id', 'weigh')->get();
+        Session::put('product_id', $product->id);
     	if (empty($product)) {
             alert()->error('product no found', 'OOh..')->persistent("Close");
             return redirect()->back();
     	}
 
         Session::put('product_id', $product->id);
-        Session::put('location', $location);
-        Session::put('delivary', $delivary);
-    	return view('cakedetail', compact('product'));
+    	return view('cakedetail', compact('product', 'products'));
     }
 
 
     public function order(){
-        return view('order');
+        $product_id = Session::get('product_id');
+        $product = Product::find($product_id);
+        $products = Product::where('title', $product->title)->select('id', 'weigh')->get();
+        return view('order', compact('product', 'products'));
     }
 
     public function postOrder(Request $request) {
-        $mdn = $request->phone;
-        $wave = new WaveHelper;
-        $msisdn = $wave->transform_msisdn($mdn);
-        $country = $wave->country($msisdn);
-        $operator = $wave->operator($msisdn, $country);
-
-        $msisdn = $this->modify_msisdn($msisdn);
+        $location = strtoupper($request->address);
+        $locationArr = config('location.location');
+        $delivery = $locationArr[$location];
+        
         $customer_id = $this->customer_creation($request->all());
-
         $product_id = Session::get('product_id');
+        $product = Product::find($product_id);
+        $total = $product->price * $request->quantity + $delivery;
+
+        if ($product->stock < $request->quantity) {
+            Alert::error('Cake not has ' . $request->quantity . '. Only Have ' .$product->stock, 'Oops!')->persistent('Close');
+            return redirect()->back();
+        }
+        $order_id = getOrderId();
+
         $producthelper = new ProductHelper;
-        $producthelper->decreaseproduct($product_id, 1);
-        $this->order_creation($product_id, $customer_id);
+        $producthelper->decreaseproduct($product_id, $request->quantity);
+        $this->order_creation($product_id, $customer_id, $order_id);
         Alert::success('Successfully saved', 'Oops!')->persistent('Close');
         Session::put('phone', $request->phone);
-        return redirect('/');
+        // return redirect('/');
 
-        // if ($country == "Myanmar (Burma)") {
-        //     $country_id = 3;
-        //     $operator = $wave->operator($msisdn, $country_id);
-        //     if ($operator != "Telenor") {
-        //         Alert::error('Operator not provide. please use telenor', 'Oops!')->persistent('Close');
-        //         return redirect()->back();
-        //     } else {
-        //         $msisdn = $this->modify_msisdn($msisdn);
-                
-        //         $customer_id = $this->customer_creation($request->all());
+        // $invoice = new InvoicePrinter();
+        $invoice = new InvoicePrinter("A4", "Ks"); 
 
-        //         // $payment = json_decode($wave->wave_payment($msisdn, 1, "MMK"), true);
-                
-        //         /* For development */
-        //         $payment = [];
-        //         $payment['success'] = true;
-        //         /* For development */
+        /* Header settings */
+        $invoice->setLogo(public_path("images/invoice.png"));   //logo image path
+        $invoice->setColor("#007fff");      // pdf color scheme
+        $invoice->setType("Order Invoice");    // Invoice Type
+        $invoice->setReference("INV-".$order_id);   // Reference
+        $invoice->setDate(date('M - d - Y',time()));   //Billing Date
+        $invoice->setTime(date('h:i:s A',time()));   //Billing Time
+        // $invoice->setDue(date('M dS ,Y',strtotime('+3 months')));    // Due Date
+        $invoice->setFrom(array($request->name,$request->phone,$request->address,""));
+        $invoice->setTo(array("Nyo Lay Htike","Online Cake Order","128 AA Juanita Ave","Glendora , CA 91740"));
+        $invoice->addItem($product->title,"",$request->quantity,$delivery,$product->price,0,$total);
+         
+        $invoice->addTotal("Total",$total);
+        $invoice->addTotal("Total due",$total,true);
+         
+        $invoice->addBadge("Ordered");
 
-        //         if ($payment['success']) {
-        //             $product_id = Session::get('product_id');
-        //             $producthelper = new ProductHelper;
-        //             $producthelper->decreaseproduct($product_id, 1);
-        //             $this->order_creation($product_id, $customer_id);
-        //             Alert::success('Successfully saved', 'Oops!')->persistent('Close');
-        //             Session::put('phone', $request->phone);
-        //             return redirect('/');
+        $invoice->addTitle("Please download and save before you got the products");
+         
+        $invoice->setFooternote("Online Cake Order");
+         
+        $invoice->render($order_id .'.pdf','I'); 
 
-        //         } else {
-        //             Alert::error('Unable to order this product', 'Oops!')->persistent('Close');
-        //             return redirect()->back();
-        //         }
-        //     }
-        // } else {
-        //     Alert::error('Please used myanmar country operator', 'Oops!')->persistent('Close');
-        //     return redirect()->back();
-        // }
     }
 
-    private function order_creation($product_id, $customer_id)
+    private function order_creation($product_id, $customer_id, $order_id)
     {
         $order = new Order;
-        $order->order_id = getOrderId();
+        $order->order_id = $order_id;
         $order->product_id = $product_id;
         $order->customer_id = $customer_id;
         $order->order_status = 0;
@@ -126,6 +124,19 @@ class CakeController extends Controller
         $product = Product::find($id);
         return view('thanks', compact($product));
     }
+
+    public function getprice($id) {
+        $product = Product::find($id);
+        Session::put('product_id', $product->id);
+        return $product;
+    }
+
+    public function getdelivery($location) {
+        $location = strtoupper($location);
+        $locationArr = config('location.location');
+        return $locationArr[$location];
+    }
+
 }
 
 

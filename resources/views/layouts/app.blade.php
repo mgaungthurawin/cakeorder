@@ -102,11 +102,32 @@
                        title: "Success!",
                        text: result.message,
                        icon: "success",
-                   });
+                    });
                    window.location.href = "{{ url('/cart') }}"; 
                 }
             })
         })
+
+        $('#order_address').focusout(function () {
+            var price = $('#hiddenprice').val();
+            if ($(this).val() == '') {
+                $('#order_address').focus();
+            }
+            $.get('/getdelivery/' + $(this).val(), function (data) {
+
+                var actualprice = parseInt(price) + parseInt(data) + " Ks";
+                $('#delivery').html(actualprice);
+            });
+        })
+
+        $(document).on('change', '#product_id', function () {
+            var product_id = $(this).val();
+            $.get('/getprice/'+ product_id, function (data) {
+                $('#cake_price').html(data.price + " Ks")
+                $('#cake_weigh').html('Weigh - ' + data.weigh)
+            })
+        });
+
 
         // var quantitiy=0;
         //    $('.quantity-right-plus').click(function(e){

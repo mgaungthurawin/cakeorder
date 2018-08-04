@@ -3,7 +3,7 @@
 Route::get('/', 'WelcomeController@index');
 Route::get('/about', 'WelcomeController@about');
 Route::get('/contact', 'WelcomeController@contact');
-Route::get('/cake/{id}/{location}/{delivary}', 'CakeController@cakedetail');
+Route::get('/cake/{id}', 'CakeController@cakedetail');
 
 Route::get('/order', 'CakeController@order');
 Route::post('/order', ['as' => 'cakeorder', 'uses' => 'CakeController@postOrder']);
@@ -11,6 +11,8 @@ Route::get('/cart', 'CartController@getCart');
 Route::post('/cart', 'CartController@postCart');
 Route::post('/removecart', 'CartController@removeCart');
 Route::get('/fbkit/verify', 'FbKitController@index');
+Route::get('/getprice/{productid}', 'CakeController@getprice');
+Route::get('/getdelivery/{location}', 'CakeController@getdelivery');
 
 Route::get('/phone', 'DashboardController@index');
 Route::post('/phone', 'DashboardController@postPhone')->name('phone');

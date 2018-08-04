@@ -1,5 +1,5 @@
 <?php
 
 function getOrderId() {
-	return rand(100,999).time();
+	return rand(10,99).time();
 }
