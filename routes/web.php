@@ -18,9 +18,9 @@ Route::get('/phone', 'DashboardController@index');
 Route::post('/phone', 'DashboardController@postPhone')->name('phone');
 Route::post('/send', 'MailController@send');
 
-Route::group(['middleware' => 'Dashboard'], function () {
-	Route::get('/dashboard', 'DashboardController@dashboard');
-});
+// Route::group(['middleware' => 'Dashboard'], function () {
+// 	Route::get('/dashboard', 'DashboardController@dashboard');
+// });
 
 Route::get('/test', function () {
 	foreach (config('location.location') as $key => $location) {

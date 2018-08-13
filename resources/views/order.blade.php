@@ -21,23 +21,33 @@
                         {{csrf_field()}}
                         <div>
                             <div class="bo4 of-hidden size15 m-b-20">
-                                <input class="sizefull s-text7 p-l-22 p-r-22" type="number" min="1" id="quantity" name="quantity" placeholder="Enter quantity">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="number" required="true" min="1" id="quantity" name="quantity" placeholder="Enter quantity">
                             </div>
                         </div>
                         <div>
                             <div class="bo4 of-hidden size15 m-b-20">
-                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="name" name="name" placeholder="Enter Contact Name">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" required="true" type="text" id="name" name="name" placeholder="Enter Contact Name">
                             </div>
                         </div>
                         <div class="bo4 of-hidden size15 m-b-20">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="phone" name="phone" placeholder="Enter Msisdn">
+                            <input class="sizefull s-text7 p-l-22 p-r-22" required="true" type="text" id="phone" name="phone" placeholder="Enter Msisdn">
+                        </div>
+                        <div class="bo4 of-hidden size15 m-b-20">
+                            <select class="sizefull s-text7 p-l-22 p-r-22" id="location" name="location">
+                                <option value="">--Select One---</option>
+                                @foreach(config('location.location') as $location)
+                                    <option value="{{$location}}">{{$location}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" id="order_address" name="address" placeholder="Enter Send Address"></textarea>
                         <div class="of-hidden size15 m-b-20">
                             <span id="delivery"></span>
                             <input type="hidden" id="hiddenprice" value="{{$product->price}}">
+                            <input type="hidden" name="url" id="url" data-url="{{url('/getdelivery') }}">
                         </div>
+
                         <div class="">
                             <button type="submit" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
                                 Submit

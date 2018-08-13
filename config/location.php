@@ -1,9 +1,22 @@
 <?php
 
 return [
-   
+
    'location' => [
-   		'SANCHAUNG' => 100,
+      'SANCHAUNG' => 'SANCHAUNG',
+      'KYIMYINTDINE' => 'KYIMYINTDINE',
+      'ALONE' => 'ALONE',
+      'MAYANGONE' => 'MAYANGONE',
+      'HLAING' => 'HLAING',
+      'INNSEIN' => 'INNSEIN',
+      'LATHA' => 'LATHA',
+      'KYAUKTADAR' => 'KYAUKTADAR',
+      'BOTAHTAUNG' => 'BOTAHTAUNG',
+      'BAHAN' => 'BAHAN',
+   ],
+   
+   'price' => [
+   		'SANCHAUNG' => 1000,
    		'KYIMYINTDINE' => 1500,
    		'ALONE' => 1800,
    		'MAYANGONE' => 2000,

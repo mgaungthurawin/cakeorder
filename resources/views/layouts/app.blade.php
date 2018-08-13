@@ -108,17 +108,28 @@
             })
         })
 
-        $('#order_address').focusout(function () {
-            var price = $('#hiddenprice').val();
-            if ($(this).val() == '') {
-                $('#order_address').focus();
-            }
-            $.get('/getdelivery/' + $(this).val(), function (data) {
+        // $('#order_address').focusout(function () {
+        //     var price = $('#hiddenprice').val();
+        //     if ($(this).val() == '') {
+        //         $('#order_address').focus();
+        //     }
+        //     $.get('/getdelivery/' + $(this).val(), function (data) {
 
+        //         var actualprice = parseInt(price) + parseInt(data) + " Ks";
+        //         $('#delivery').html(actualprice);
+        //     });
+        // })
+
+        $(document).on('change', '#location', function () {
+
+            var price = $('#hiddenprice').val();
+            var url=$('#url').attr('data-url');
+            $.get('/getdelivery/' + $(this).val(), function (data) {
+                console.log(data);
                 var actualprice = parseInt(price) + parseInt(data) + " Ks";
                 $('#delivery').html(actualprice);
             });
-        })
+        });
 
         $(document).on('change', '#product_id', function () {
             var product_id = $(this).val();

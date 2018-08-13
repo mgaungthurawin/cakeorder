@@ -38,8 +38,8 @@ class CakeController extends Controller
     }
 
     public function postOrder(Request $request) {
-        $location = strtoupper($request->address);
-        $locationArr = config('location.location');
+        $location = strtoupper($request->location);
+        $locationArr = config('location.price');
         $delivery = $locationArr[$location];
         
         $customer_id = $this->customer_creation($request->all());
@@ -112,6 +112,7 @@ class CakeController extends Controller
             $row = new Customer;
             $row->name = $request['name'];
             $row->phone = $request['phone'];
+            $row->location = $request['location'];
             $row->address = $request['address'];
             $row->save();
         }
@@ -133,7 +134,7 @@ class CakeController extends Controller
 
     public function getdelivery($location) {
         $location = strtoupper($location);
-        $locationArr = config('location.location');
+        $locationArr = config('location.price');
         return $locationArr[$location];
     }
 

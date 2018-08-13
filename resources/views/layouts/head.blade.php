@@ -41,9 +41,6 @@
                         <li>
                             <a href="{{url('/contact')}}">Contact</a>
                         </li>
-                        <li>
-                            <a href="{{ url('/dashboard') }}">Dashboard</a>
-                        </li>
                     </ul>
                 </nav>
             </div>
