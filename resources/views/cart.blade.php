@@ -38,7 +38,11 @@
                                 <td></td>
                                 <td></td>
                                 <td>Total</td>
-                                <td>{{Cart::subtotal()}}</td>
+                                <td>
+                                    {{Cart::subtotal()}}
+                                    <br/><br/>
+                                    <a href="{{ url('/cartorder') }}" class="btn btn-primary">Order</a>
+                                </td>
                             </tr>
                     </tbody>
                 </table>

@@ -9,10 +9,13 @@ Route::get('/order', 'CakeController@order');
 Route::post('/order', ['as' => 'cakeorder', 'uses' => 'CakeController@postOrder']);
 Route::get('/cart', 'CartController@getCart');
 Route::post('/cart', 'CartController@postCart');
+Route::get('/cartorder', 'CartController@cartOrder');
+Route::post('/cartorder', ['as' => 'cartorder', 'uses' => 'CartController@postCartOrder']);
 Route::post('/removecart', 'CartController@removeCart');
 Route::get('/fbkit/verify', 'FbKitController@index');
 Route::get('/getprice/{productid}', 'CakeController@getprice');
 Route::get('/getdelivery/{location}', 'CakeController@getdelivery');
+Route::get('/cartdelivery/{location}', 'CartController@cartdelivery');
 
 Route::get('/phone', 'DashboardController@index');
 Route::post('/phone', 'DashboardController@postPhone')->name('phone');

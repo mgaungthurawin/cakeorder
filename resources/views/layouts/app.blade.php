@@ -125,11 +125,17 @@
             var price = $('#hiddenprice').val();
             var url=$('#url').attr('data-url');
             $.get('/getdelivery/' + $(this).val(), function (data) {
-                console.log(data);
                 var actualprice = parseInt(price) + parseInt(data) + " Ks";
                 $('#delivery').html(actualprice);
             });
         });
+
+        $(document).on('change', '#cartlocation', function () {
+            var url=$('#url').attr('data-url');
+            $.get( url + '/' + $(this).val(), function (data) {
+                $('#delivery').html(data);
+            });
+        })
 
         $(document).on('change', '#product_id', function () {
             var product_id = $(this).val();
