@@ -69,10 +69,10 @@
 
         $(document).on('click', '#addtocart', function () {
             var qty = 1;
-            var product_id = $('#product_id').val();
+            var product_id = $('#spanproduct').text();
             var name = $('#title').val();
             var price = $('#price').val();
-            var data = {'_token': $('meta[name=csrf-token]').attr('content'), product_id : product_id, name: name, qty: qty ,price: price}
+            var data = {'_token': $('meta[name=csrf-token]').attr('content'), product_id : product_id}
             $.post('/cart', data, function (result) {
                 if (result.status) {
                     swal({
@@ -139,54 +139,12 @@
 
         $(document).on('change', '#product_id', function () {
             var product_id = $(this).val();
+            document.getElementById('spanproduct').innerHTML = product_id;
             $.get('/getprice/'+ product_id, function (data) {
                 $('#cake_price').html(data.price + " Ks")
                 $('#cake_weigh').html('Weigh - ' + data.weigh)
             })
         });
-
-
-        // var quantitiy=0;
-        //    $('.quantity-right-plus').click(function(e){
-                
-        //         // Stop acting like a button
-        //         e.preventDefault();
-        //         // Get the field name
-        //         var quantity = parseInt($('#quantity').val());
-                
-        //         // If is not undefined
-                    
-        //             $('#quantity').val(quantity + 1);
-
-                  
-        //             // Increment
-                
-        //     });
-
-        //      $('.quantity-left-minus').click(function(e){
-        //         // Stop acting like a button
-        //         e.preventDefault();
-        //         // Get the field name
-        //         var quantity = parseInt($('#quantity').val());
-                
-        //         // If is not undefined
-        //             // Increment
-        //             if(quantity > 0){
-        //                 $('#quantity').val(quantity - 1);
-        //             }
-        //     });
-
-        // (function ($) {
-        //    $('.spinner .btn:first-of-type').on('click', function() {
-        //         $('.spinner input').val( parseInt($('.spinner input').val(), 10) + 1);
-        //     });
-        //     $('.spinner .btn:last-of-type').on('click', function() {
-        //         var qty = $('#quantity').val();
-        //         if (qty > 1) {
-        //             $('.spinner input').val( parseInt($('.spinner input').val(), 10) - 1);
-        //         }
-        //     });
-        // })(jQuery);
 
     </script>
     @include('sweet::alert')

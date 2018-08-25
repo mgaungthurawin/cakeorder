@@ -63,6 +63,7 @@
                         </div>
                     </div>
                     <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
+                    <span id="spanproduct" style="display: none;">{{$product->id}}</span>
                     <input type="hidden" id="title" name="title" value="{{$product->title}}">
                     <input type="hidden" id="price" name="price" value="{{$product->price}}">
                 </div>

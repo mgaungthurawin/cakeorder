@@ -8,15 +8,18 @@ use App\Helper\ProductHelper;
 use Konekt\PdfInvoice\InvoicePrinter;
 use App\Customer;
 use App\Admin\Order;
+use App\Admin\Product;
 use Alert;
 use Session;
 
 class CartController extends Controller
 {
     public function postCart(Request $request) {
+        $product_id = $request->product_id;
+        $prod = Product::where('id', $product_id)->first();
         $producthelper = new ProductHelper;
     	Cart::add([
-    	  ['id' => $request->product_id, 'name' => $request->name, 'qty' => $request->qty, 'price' => $request->price]
+    	  ['id' => $prod->id, 'name' => $prod->title, 'qty' => 1, 'price' => $prod->price]
     	]);	
 
     	if (Cart::content()) {
@@ -84,10 +87,10 @@ class CartController extends Controller
         $invoice->setFrom(array($request->name,$request->phone,$request->address,""));
         $invoice->setTo(array("Nyo Lay Htike","Online Cake Order","128 AA Juanita Ave","Glendora , CA 91740"));
         foreach ($carts as $key => $cart) {
-            $invoice->addItem($cart->name,"",$cart->qty,$delivery,$cart->price,0,$cart->subtotal);
+            $invoice->addItem($cart->name,"",$cart->qty,0,$cart->price,0,$cart->subtotal);
             Cart::remove($cart->rowId);
         }
-         
+        $total += $delivery;
         $invoice->addTotal("Total",$total);
         $invoice->addTotal("Total due",$total,true);
          

@@ -128,7 +128,7 @@ class CakeController extends Controller
 
     public function getprice($id) {
         $product = Product::find($id);
-        Session::put('product_id', $product->id);
+        Session::put('product_id', $id);
         return $product;
     }
 
