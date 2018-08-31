@@ -35,7 +35,7 @@
                             <span class="s-text6">on</span> <span class="s-text7">July 18, 2017</span>
 
                             <p class="s-text8 p-t-16">
-                                Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
+                                The Cake Shop was founded by a team of passionate and dedicated bakers who are committed in baking the most delicious cakes and pastries around. Using only the freshest ingredients we can find, you can be sure that you are served the best quality cake you can ever have.
                             </p>
                         </div>
                     </div>
@@ -56,7 +56,12 @@
                             </h4>
 
                             <p class="s-text8 p-t-16">
-                                Duis ut velit gravida nibh bibendum commodo. Sus-pendisse pellentesque mattis augue id euismod. Inter-dum et malesuada fames
+                                We have evolved to become one of a premium distributor and wholesaler for cakes and pastries to some well known resturants, cafes, supermart, hotels and bakery.
+                                <br/>
+
+                                Our online store is a leading online shop in Yangon providing cakes and gifts deliveries. We provide competitive prices, good after sales services and on-time delivery.
+                                <br/>
+                                The Cake Shop provides same day delivery service seven days a week, including Sunday, within Yangon to provide a high level of customer service.
                             </p>
                         </div>
                     </div>

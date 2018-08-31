@@ -24,7 +24,7 @@
         <div class="wrap_header">
             <!-- Logo -->
             <a href="index.html" class="logo">
-                <img src="{{url('frontend/images/icons/logo.png')}}" alt="IMG-LOGO">
+                <img src="{{url('frontend/images/icons/logo_bk.png')}}" alt="IMG-LOGO">
             </a>
 
             <!-- Menu -->
@@ -104,7 +104,7 @@
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="index.html" class="logo-mobile">
-            <img src="{{url('frontend/images/icons/logo.png')}}" alt="IMG-LOGO">
+            <img src="{{url('frontend/images/icons/logo.jpeg')}}" alt="IMG-LOGO">
         </a>
 
         <!-- Button show menu -->
