@@ -41,6 +41,21 @@
                         <li>
                             <a href="{{url('/contact')}}">Contact</a>
                         </li>
+                        <li>
+                            <a href="#">Delivery Price</a>
+                            <ul class="sub_menu">
+                                <li><a href="#">Sanchaung - 1000</a></li>
+                                <li><a href="#">KyiMyintDine - 1500</a></li>
+                                <li><a href="#">Alone - 1800</a></li>
+                                <li><a href="#">Mayangone - 2000</a></li>
+                                <li><a href="#">Hlaing - 2500</a></li>
+                                <li><a href="#">Insein - 3500</a></li>
+                                <li><a href="#">Latha - 2500</a></li>
+                                <li><a href="#">Kyaukdadar - 2800</a></li>
+                                <li><a href="#">BotaHtaung - 3000</a></li>
+                                <li><a href="#">Bahan - 3500</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>

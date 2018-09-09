@@ -21,7 +21,7 @@ return [
    		'ALONE' => 1800,
    		'MAYANGONE' => 2000,
    		'HLAING' => 2500,
-   		'INNSEIN' => 35000,
+   		'INNSEIN' => 3500,
    		'LATHA' => 2500,
    		'KYAUKTADAR' => 2800,
    		'BOTAHTAUNG' => 3000,

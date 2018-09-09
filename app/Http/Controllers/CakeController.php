@@ -72,7 +72,7 @@ class CakeController extends Controller
         $invoice->setTime(date('h:i:s A',time()));   //Billing Time
         // $invoice->setDue(date('M dS ,Y',strtotime('+3 months')));    // Due Date
         $invoice->setFrom(array($request->name,$request->phone,$request->address,""));
-        $invoice->setTo(array("Nyo Lay Htike","Online Cake Order","128 AA Juanita Ave","Glendora , CA 91740"));
+        $invoice->setTo(array("Nyo Lay Htike","Online Cake Order","No (7) Ahwaiyer st","8 ward , Kamayut Township"));
         $invoice->addItem($product->title,"",$request->quantity,$delivery,$product->price,0,$total);
          
         $invoice->addTotal("Total",$total);
