@@ -53,28 +53,25 @@ class CartController extends Controller
     }
 
     public function postCartOrder(Request $request) {
-        
         $location = strtoupper($request->location);
         $locationArr = config('location.price');
         $delivery = $locationArr[$location]; 
         $delivery = $delivery ;
         $delivery_date = $request->delivery_date . ' ' . date('H:i:s');
-
-        
         $customer_id = $this->customer_creation($request->all());
         $order_id = getOrderId();
         $producthelper = new ProductHelper;
         $carts = Cart::content();
         $total = 0;
         foreach ($carts as $key => $cart) {
-            $this->order_creation($cart->id, $customer_id, $order_id);
-            $producthelper->decreaseproduct($cart->id, $cart->quantity);
+            order_creation($cart->id, $customer_id, $order_id, $request->text, $delivery_date);
+            $producthelper->decreaseproduct($cart->id, $cart->qty);
             $total += $cart->subtotal;
         }
-        Alert::success('Successfully saved', 'Oops!')->persistent('Close');
-        Session::put('phone', $request->phone);
+        // Alert::success('Successfully saved', 'Oops!')->persistent('Close');
+        // Session::put('phone', $request->phone);
     
-        Session::put('phone', $request->phone);
+        // Session::put('phone', $request->phone);
         // return redirect('/');
 
 
@@ -128,16 +125,6 @@ class CartController extends Controller
         }
 
         return $row->id;
-    }
-
-    private function order_creation($product_id, $customer_id, $order_id)
-    {
-        $order = new Order;
-        $order->order_id = $order_id;
-        $order->product_id = $product_id;
-        $order->customer_id = $customer_id;
-        $order->order_status = 0;
-        $order->save();
     }
 
 }
