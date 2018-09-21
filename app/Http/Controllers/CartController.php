@@ -56,7 +56,10 @@ class CartController extends Controller
         
         $location = strtoupper($request->location);
         $locationArr = config('location.price');
-        $delivery = $locationArr[$location];
+        $delivery = $locationArr[$location]; 
+        $delivery = $delivery ;
+        $delivery_date = $request->delivery_date . ' ' . date('H:i:s');
+
         
         $customer_id = $this->customer_creation($request->all());
         $order_id = getOrderId();
@@ -73,6 +76,9 @@ class CartController extends Controller
     
         Session::put('phone', $request->phone);
         // return redirect('/');
+
+
+   
 
         $invoice = new InvoicePrinter("A4", "Ks"); 
 

@@ -37,7 +37,14 @@
                             </select>
                         </div>
 
-                        <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" id="order_address" name="address" placeholder="Enter Send Address"></textarea>
+                        <div class="bo4 of-hidden size15 m-b-20">
+                            <input class="sizefull s-text7 p-l-22 p-r-22" required="true" type="text" id="text" name="text" placeholder="Enter caketext">
+                        </div>
+                         <div class="bo4 of-hidden size15 m-b-20">
+                            <input class="sizefull s-text7 p-l-22 p-r-22" required="true" type="text" id="delivery_date" name="delivery_date" placeholder="Enter deliverydate">
+                        </div>
+
+                        <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" required="true" d="order_address" name="address" placeholder="Enter Send Address"></textarea>
                         <div class="of-hidden size15 m-b-20">
                             <span id="delivery"></span>
                             

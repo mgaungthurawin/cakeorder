@@ -41,7 +41,9 @@ class CakeController extends Controller
         $location = strtoupper($request->location);
         $locationArr = config('location.price');
         $delivery = $locationArr[$location];
-        
+        $delivery = $delivery ;
+        $delivery_date = $request->delivery_date . ' ' . date('H:i:s');
+
         $customer_id = $this->customer_creation($request->all());
         $product_id = Session::get('product_id');
         $product = Product::find($product_id);
@@ -55,7 +57,7 @@ class CakeController extends Controller
 
         $producthelper = new ProductHelper;
         $producthelper->decreaseproduct($product_id, $request->quantity);
-        $this->order_creation($product_id, $customer_id, $order_id);
+        $this->order_creation($product_id, $customer_id, $order_id, $request->text, $delivery_date);
         Alert::success('Successfully saved', 'Oops!')->persistent('Close');
         Session::put('phone', $request->phone);
         // return redirect('/');
@@ -88,13 +90,17 @@ class CakeController extends Controller
 
     }
 
-    private function order_creation($product_id, $customer_id, $order_id)
+    private function order_creation($product_id, $customer_id, $order_id, $text, $delivery)
     {
+        $order_date = date('Y-m-d H:i:s');
         $order = new Order;
         $order->order_id = $order_id;
         $order->product_id = $product_id;
         $order->customer_id = $customer_id;
         $order->order_status = 0;
+        $order->cake_text = $text;
+        $order->order_date = $order_date;
+        $order->delivery_date = $delivery;
         $order->save();
     }
 
@@ -108,14 +114,14 @@ class CakeController extends Controller
     private function customer_creation($request) {
         $row = Customer::where('phone', $request['phone'])->first();
 
-        if (!$row) {
+        // if (!$row) {
             $row = new Customer;
             $row->name = $request['name'];
             $row->phone = $request['phone'];
             $row->location = $request['location'];
             $row->address = $request['address'];
             $row->save();
-        }
+        // }
 
         return $row->id;
     }

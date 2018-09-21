@@ -165,6 +165,7 @@
                 format: 'DD/MM/YYYY'
             });
 
+
         });
     </script>
     @yield('scripts')

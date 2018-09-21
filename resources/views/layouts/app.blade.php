@@ -44,6 +44,8 @@
     <script type="text/javascript" src="{{url('frontend/vendor/countdowntime/countdowntime.js')}}"></script>
     <script type="text/javascript" src="{{url('frontend/vendor/lightbox2/js/lightbox.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         // $('.block2-btn-addcart').each(function(){
         //     var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
@@ -124,8 +126,11 @@
 
             var price = $('#hiddenprice').val();
             var url=$('#url').attr('data-url');
+             var qty = $('#quantity').val();
             $.get('/getdelivery/' + $(this).val(), function (data) {
-                var actualprice = parseInt(price) + parseInt(data) + " Ks";
+                var totaldelivery = parseInt(data) ;
+
+                var actualprice = parseInt(price) * qty + totaldelivery + " Ks";
                 $('#delivery').html(actualprice);
             });
         });
@@ -144,6 +149,10 @@
                 $('#cake_price').html(data.price + " Ks")
                 $('#cake_weigh').html('Weigh - ' + data.weigh)
             })
+        });
+
+        $('#delivery_date').datetimepicker({
+            format: 'YYYY-MM-DD'
         });
 
     </script>
