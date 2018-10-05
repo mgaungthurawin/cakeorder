@@ -107,9 +107,16 @@ class CartController extends Controller
     }
 
     public function cartdelivery($location) {
+        $price = 0;
+        $carts = Cart::content();
+        foreach ($carts as $key => $cart) {
+            $price += $cart->price;
+            $qty = $cart->qty;
+        }
         $location = strtoupper($location);
         $locationArr = config('location.price');
-        return $locationArr[$location];
+        $totalprice = $price * $qty + $locationArr[$location];  
+        return $totalprice;
     }
 
     private function customer_creation($request) {

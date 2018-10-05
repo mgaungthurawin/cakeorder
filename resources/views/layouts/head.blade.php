@@ -66,10 +66,6 @@
                     <ul class="main_menu">
                         <li>
                             <a href="{{url('login')}}">Login</a>
-                            <ul class="sub_menu">
-                                
-                                <li><a href="{{url('register')}}">Register</a></li>
-                            </ul>
                         </li>
                     </ul>       
                 @else

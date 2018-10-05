@@ -43,16 +43,6 @@
                     </div>
                 </div>
                 <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
-
-                    <div class="block3">
-                        <div class="block3-txt p-t-14">
-                            <div class="w-size25">
-                                <a href="{{url('/order')}}" id="wavemoney" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
-                                    Order
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                     <div class="block3">
                         <div class="block3-txt p-t-14">
                             <div class="w-size25">

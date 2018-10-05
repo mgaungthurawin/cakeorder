@@ -2,6 +2,9 @@
 
 @section('content')
     <section class="content-header">
+        <h1 class="pull-right">
+           <a class="btn btn-primary pull-right" id="delete_customer">Delete Customer</a>
+        </h1>
         <div class="row">
             <form method="GET">
                 <div class="form-group col-md-3">

@@ -5,8 +5,8 @@ Route::get('/about', 'WelcomeController@about');
 Route::get('/contact', 'WelcomeController@contact');
 Route::get('/cake/{id}', 'CakeController@cakedetail');
 
-Route::get('/order', 'CakeController@order');
-Route::post('/order', ['as' => 'cakeorder', 'uses' => 'CakeController@postOrder']);
+// Route::get('/order', 'CakeController@order');
+// Route::post('/order', ['as' => 'cakeorder', 'uses' => 'CakeController@postOrder']);
 Route::get('/cart', 'CartController@getCart');
 Route::post('/cart', 'CartController@postCart');
 Route::get('/cartorder', 'CartController@cartOrder');
@@ -45,5 +45,6 @@ Route::group(['middleware' => 'Admin'], function () {
 	Route::get('customer', 'Admin\CustomerController@index');
 	Route::post('/orderfilter', 'Admin\FilterController@orderfilter');
 	Route::resource('orderlist', 'Admin\OrderController');
+	Route::post('deletecustomer', 'Admin\DeleteCustomerController@delete');
 });
 

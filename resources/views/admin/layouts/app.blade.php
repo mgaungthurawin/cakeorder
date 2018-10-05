@@ -109,7 +109,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{!! url('/') !!}">
-                    BBC New
+                    Cake Order
                 </a>
             </div>
 
@@ -165,6 +165,35 @@
                 format: 'DD/MM/YYYY'
             });
 
+            var arr = new Array();
+            $(document).on('change', '#customer', function () {
+                arr.push($(this).val());
+            })
+
+            $(document).on('click', '#delete_customer', function (e) {
+                e.preventDefault();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                 $.ajax({
+                        url: "/deletecustomer",
+                        type: "POST",
+                        data: { customer: arr },
+                        success: function(data)
+                        {
+                            window.location.href = data;
+                        },
+                        error: function(e) 
+                        {
+                            alert('error')
+                        }           
+                });
+            })
 
         });
     </script>
