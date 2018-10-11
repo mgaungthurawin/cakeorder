@@ -68,11 +68,14 @@ class CartController extends Controller
             $producthelper->decreaseproduct($cart->id, $cart->qty);
             $total += $cart->subtotal;
         }
+
+        $tax = $total * 5 / 100; 
+
         // Alert::success('Successfully saved', 'Oops!')->persistent('Close');
         // Session::put('phone', $request->phone);
     
-        // Session::put('phone', $request->phone);
-        // return redirect('/');
+        // // Session::put('phone', $request->phone);
+        // // return redirect('/');
 
 
    
@@ -94,8 +97,9 @@ class CartController extends Controller
             Cart::remove($cart->rowId);
         }
         $total += $delivery;
+        $reald_total = $total + $tax ;
         $invoice->addTotal("Total",$total);
-        $invoice->addTotal("Total due",$total,true);
+        $invoice->addTotal("Total due",$reald_total,true);
          
         $invoice->addBadge("Ordered");
 

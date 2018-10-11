@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<section class="blog bgwhite p-t-94 p-b-65">
+<section class="order blog bgwhite p-t-94 p-b-65">
     <div class="container">
         <div class="row">
             <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
@@ -17,7 +17,7 @@
                 <div class="block3">
                     <div class="block3-txt p-t-14">
                         
-                    <form class="leave-comment" method="post" action="{{route('cartorder')}}">
+                    <form class="leave-comment" id="order-form" method="post" action="{{route('cartorder')}}">
                         {{csrf_field()}}
                         <div>
                             <div class="bo4 of-hidden size15 m-b-20">
